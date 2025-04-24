@@ -27,5 +27,10 @@ userShecma.pre("save", async function (next) {
   next();
 });
 
+// match passwords
+userShecma.methods.comparePassword = function (cadidatePassword) {
+  return bcrypt.compare(cadidatePassword, this.password);
+};
+
 const User = new model("User", userShecma);
 module.exports = User;
