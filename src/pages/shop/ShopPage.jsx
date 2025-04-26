@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProductCards from "./ProductCards";
-import productsData from "../../data/products.json";
+
 import ShopFiltering from "./ShopFiltering";
+import { useFetchAllProductsQuery } from "../../redux/features/products/productsApi";
 
 const filters = {
   categories: ["all", "accessories", "dress", "jewellery", "cosmetics"],
@@ -15,40 +16,29 @@ const filters = {
 };
 
 const ShopPage = () => {
-  const [products, setProducts] = useState(productsData);
   const [filtersState, setfiltersState] = useState({
     category: "all",
     color: "all",
     priceRange: "",
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ProductsPerPage] = useState(8);
 
-  const applyFilters = () => {
-    let filteredProducts = productsData;
+  const { category, color, priceRange } = filtersState;
+  const [minPrice, maxPrice] = priceRange.split("-").map(Number);
 
-    if (filtersState.category && filtersState.category !== "all") {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.category === filtersState.category
-      );
-    }
-    if (filtersState.color && filtersState.color !== "all") {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.color === filtersState.color
-      );
-    }
-    if (filtersState.priceRange) {
-      const [minPrice, maxPrice] = filtersState.priceRange
-        .split("-")
-        .map(Number);
-      filteredProducts = filteredProducts.filter(
-        (product) => product.price >= minPrice && product.price <= maxPrice
-      );
-    }
-    setProducts(filteredProducts);
-  };
-
-  useEffect(() => {
-    applyFilters();
-  }, [filtersState]);
+  const {
+    data: { products = [], totalPages, totalProducts } = {},
+    error,
+    isLoading,
+  } = useFetchAllProductsQuery({
+    category: category !== "all" ? category : "",
+    color: color !== "all" ? color : "",
+    minPrice: isNaN(minPrice) ? "" : minPrice,
+    maxPrice: isNaN(maxPrice) ? "" : maxPrice,
+    page: currentPage,
+    limit: ProductsPerPage,
+  });
 
   const clearFilters = () => {
     setfiltersState({
@@ -57,6 +47,9 @@ const ShopPage = () => {
       priceRange: "",
     });
   };
+
+  if (isLoading) return <div>Loading....</div>;
+  if (error) return <div>Error Loading Products...</div>;
   return (
     <>
       <section className="section__container bg-primary-light">
