@@ -24,75 +24,101 @@ import ManageUser from "../pages/dashboard/admin/users/ManageUser";
 import ManageOrders from "../pages/dashboard/admin/manageOrders/ManageOrders";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        children: [
-            { path: "/", element: <Home /> },
-            { path: "/categories/:categoryName", element: <CategoryPage /> },
-            { path: "/search", element: <Search /> },
-            { path: "/shop", element: <ShopPage /> },
-            { path: "/shop/:id", element: <SingleProduct /> },
-            {
-                path: "/success",
-                element: <PaymentSuccess />
-            },
-            {
-                path: "/orders/:orderId",
-                element: <OrderDetails/>
-            }
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/categories/:categoryName", element: <CategoryPage /> },
+      { path: "/search", element: <Search /> },
+      { path: "/shop", element: <ShopPage /> },
+      { path: "/shop/:id", element: <SingleProduct /> },
+      {
+        path: "/success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/orders/:orderId",
+        element: <OrderDetails />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  // dashboard routes start here
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      // user routes
+      { path: "", element: <UserDMain /> },
+      { path: "orders", element: <UserOrders /> },
+      { path: "payments", element: <UserPayments /> },
+      { path: "profile", element: <UserProfile /> },
+      { path: "reviews", element: <UserReviews /> },
 
-        ]
-    },
-    {
-        path: "/login",
-        element: <Login />
-    },
-    {
-        path: "/register",
-        element: <Register />
-    },
-    // dashboard routes start here
-    {
-        path: "/dashboard",
-        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
-        children: [
-            // user routes
-            { path: '', element: <UserDMain/>},
-            { path: 'orders', element: <UserOrders/> },
-            { path: 'payments', element: <UserPayments/> },
-            { path: 'profile', element: <UserProfile/> },
-            { path: 'reviews', element: <UserReviews/> },
+      // admin routes (only accessible by admin) Todo: private routes with role field
+      {
+        path: "admin",
+        element: (
+          <PrivateRoute role="admin">
+            <AdminDMain />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-product",
 
-
-            // admin routes (only accessible by admin) Todo: private routes with role field
-            {
-                path: "admin",
-                element: <PrivateRoute role="admin"><AdminDMain/></PrivateRoute>
-            },
-            {
-                path: "add-product",
-
-                element: <PrivateRoute role="admin"><AddProduct/></PrivateRoute>
-            },
-            {
-                path: "manage-products",
-                element: <PrivateRoute role="admin"><ManageProduct/></PrivateRoute>
-
-            },
-            {
-                path: "update-product/:id",
-                element: <PrivateRoute role="admin"><UpdateProduct/></PrivateRoute>
-            },
-            { path: "users", element: <PrivateRoute role="admin"><ManageUser/></PrivateRoute> },
-            { path: "manage-orders", 
-            element: <PrivateRoute role="admin">
-                <ManageOrders/>
-                </PrivateRoute> 
-            },
-        ]
-    }
-
+        element: (
+          <PrivateRoute role="admin">
+            <AddProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-products",
+        element: (
+          <PrivateRoute role="admin">
+            <ManageProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "update-product/:id",
+        element: (
+          <PrivateRoute role="admin">
+            <UpdateProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <PrivateRoute role="admin">
+            <ManageUser />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-orders",
+        element: (
+          <PrivateRoute role="admin">
+            <ManageOrders />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default router;
