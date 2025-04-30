@@ -5,7 +5,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/features/auth/authSlice";
 
 const navItems = [
-  { path: "/dashboard/admin", label: "Dashboard" },
+  { path: "/dashboard/admin", label: "Admin Dashboard" },
   { path: "/dashboard/add-product", label: "Add Product" },
   { path: "/dashboard/manage-products", label: "Manage Products" },
   { path: "/dashboard/users", label: "Users" },
@@ -40,7 +40,7 @@ const AdminDashboard = () => {
             <li key={item.path}>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? "text-blue-600 font-bold" : "text-black"
+                  isActive ? "text-red-600 font-bold" : "text-black"
                 }
                 end
                 to={item.path}
