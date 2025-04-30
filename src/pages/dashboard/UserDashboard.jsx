@@ -36,7 +36,7 @@ const UserDashboard = () => {
           <Link to="/">
             Sayuru Fashion Shop<span>.</span>
           </Link>
-          <p className="text-xs italic">User dashboard</p>
+          <p className="text-xs italic">User Dashboard</p>
         </div>
         <hr className="mt-5" />
         <ul className="space-y-5 pt-5">
@@ -44,7 +44,7 @@ const UserDashboard = () => {
             <li key={item.path}>
               <NavLink
                 className={({ isActive }) =>
-                  isActive ? "text-blue-600 font-bold" : "text-black"
+                  isActive ? "text-red-600 font-bold" : "text-black"
                 }
                 end
                 to={item.path}
