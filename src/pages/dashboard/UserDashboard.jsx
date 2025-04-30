@@ -33,8 +33,6 @@ const UserDashboard = () => {
     <div className="space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between">
       <div>
         <div className="nav__logo">
-          Sayuru Fashion Shop<span>.</span>
-          Sayuru Fashion Shop<span>.</span>
           <Link to="/">
             Sayuru Fashion Shop<span>.</span>
           </Link>

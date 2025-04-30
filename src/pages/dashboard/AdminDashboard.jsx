@@ -32,7 +32,7 @@ const AdminDashboard = () => {
           <Link to="/">
             Sayuru Fashion Shop<span>.</span>
           </Link>
-          <p className="text-xs italic">User dashboard</p>
+          <p className="text-xs italic">Admin dashboard</p>
         </div>
         <hr className="mt-5" />
         <ul className="space-y-5 pt-5">
