@@ -12,20 +12,19 @@ import UploadImage from "../addProduct/UploadImage";
 const categories = [
   { label: "Select Category", value: "" },
   { label: "Accessories", value: "accessories" },
-  { label: "Dress", value: "dress" },
-  { label: "Jewellery", value: "jewellery" },
-  { label: "Cosmetics", value: "cosmetics" },
+  { label: "Shirts", value: "shirts" },
+  { label: "Pants", value: "pants" },
+  { label: "Shoes", value: "shoes" },
 ];
 
 const colors = [
   { label: "Select Color", value: "" },
   { label: "Black", value: "black" },
-  { label: "Red", value: "red" },
-  { label: "Gold", value: "gold" },
-  { label: "Blue", value: "blue" },
-  { label: "Silver", value: "silver" },
+  { label: "White", value: "white" },
+  { label: "Navy Blue", value: "navy blue" },
+  { label: "Gray", value: "gray" },
   { label: "Beige", value: "beige" },
-  { label: "Green", value: "green" },
+  { label: "Other", value: "other" },
 ];
 
 const UpdateProduct = () => {
