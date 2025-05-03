@@ -5,8 +5,9 @@ import ShopFiltering from "./ShopFiltering";
 import { useFetchAllProductsQuery } from "../../redux/features/products/productsApi";
 
 const filters = {
-  categories: ["all", "accessories", "dress", "jewellery", "cosmetics"],
-  colors: ["all", "black", "red", "gold", "blue", "silver", "beige", "green"],
+  //categories: ["all", "accessories", "dress", "jewellery", "cosmetics"],
+  categories: ["all", "shirts", "pants", "shoes", "accessories"],
+  colors: ["all", "black", "white", "navy blue", "gray", "beige", "other"],
   priceRanges: [
     { label: "Under $50", min: 0, max: 50 },
     { label: "$50 - $100", min: 50, max: 100 },
